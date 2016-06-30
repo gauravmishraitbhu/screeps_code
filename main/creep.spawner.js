@@ -9,6 +9,7 @@
  
 var creepConfig = require('creep.config')
 var creepTypes = require('creep.types')
+var config = require('config')
 
 module.exports = {
     checkAndSpawnCreeps : function(targetHarvesterCount , targetBuilderCount , targetUpgraderCount,targetRepairCount){
@@ -56,10 +57,40 @@ module.exports = {
             }
             
         }
-        
+
+        var panicRepair = false;
+        if(targetRepairCount == -1){
+            var roomName = config.ROOM_NAME;
+
+            var room = Game.rooms[roomName];
+            var wallAndRoads = room.find(FIND_STRUCTURES,{
+                filter : (structure) => (structure.structureType == STRUCTURE_WALL ||
+                                        structure.structureType == STRUCTURE_ROAD)
+            })
+
+            for(var i = 0 ; i < wallAndRoads.length ; i++){
+                let structure = wallAndRoads[i];
+                if(structure.structureType == STRUCTURE_WALL && structure.hits < 3000){
+
+                    targetRepairCount = 1;
+                    panicRepair = true;
+                    break;
+
+                }
+
+                if(structure.structureType == STRUCTURE_ROAD
+                    && structure.hits < structure.hitsMax/2){
+                    targetRepairCount = 1;
+                    panicRepair = true;
+                    break;
+                }
+            }
+        }
+
+
         // console.log('Room  has '+Game.rooms["E23N26"].energyAvailable+' energy');
 
-        var creepTypeList = creepConfig.getPriorityList();
+        var creepTypeList = creepConfig.getPriorityList(currentCountMap , panicRepair);
 
         for(var i=0 ; i<creepTypeList.length ; i++){
             var creepType = creepTypeList[i];

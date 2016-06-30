@@ -31,7 +31,7 @@ module.exports = {
         return creepConfig[creepType].body;
     },
 
-    getPriorityList : function(currentCountMap){
+    getPriorityList : function(currentCountMap , panicRepair){
         //var configs = Object.values(creepConfig);
 
         var currentHarvester = 0, currentBuilder = 0, currentUpgrader = 0;
@@ -40,6 +40,10 @@ module.exports = {
             currentHarvester = currentCountMap[creepTypes.HARVESTER];
             currentBuilder = currentCountMap[creepTypes.BUILDER];
             currentUpgrader = currentCountMap[creepTypes.UPGRADER]
+        }
+
+        if(panicRepair){
+            return ["repair" , "upgrader" , "builder" , "harvester"]
         }
 
         //in case if thrashing is occuring. ie harvesting rate is not enuf to spawn
