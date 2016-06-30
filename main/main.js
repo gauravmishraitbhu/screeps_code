@@ -9,12 +9,12 @@ module.exports.loop = function () {
 
     PathFinder.use(true);
 
-    if(Memory.tickToUpdate == 50){
-        structureUtils.updateStructures();
-        Memory.tickToUpdate = 0;
-    }else{
-        Memory.tickToUpdate ++;
-    }
+    //if(Memory.tickToUpdate == 50){
+    //    structureUtils.updateStructures();
+    //    Memory.tickToUpdate = 0;
+    //}else{
+    //    Memory.tickToUpdate ++;
+    //}
 
 
     for(var name in Memory.creeps) {

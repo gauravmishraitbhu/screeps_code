@@ -13,22 +13,33 @@ var roleRepair = {
 
         // console.log(wallIds.length)
 
+
+        //var wallIds = structureUtils.getWallObjectIds();
+        //
+        //for(var i = 0 ; i< wallIds.length ; i++){
+        //    var wall = Game.getObjectById(wallIds[i]);
+        //    //console.log(JSON.stringify(wall))
+        //    if(wall){
+        //        // console.log(wall.structureType);
+        //        // console.log(wall.hits);
+        //        if( (wall.structureType == STRUCTURE_WALL )
+        //            && wall.hits < 3100){
+        //            wallToRepair = wall;
+        //            break;
+        //        }
+        //    }
+        //
+        //}
+
         var wallToRepair = null;
-        var wallIds = structureUtils.getWallObjectIds();
+        var wallObjects = creep.room.find(FIND_STRUCTURES,{filter:{'structureType':STRUCTURE_WALL}});
 
-        for(var i = 0 ; i< wallIds.length ; i++){
-            var wall = Game.getObjectById(wallIds[i]);
-            //console.log(JSON.stringify(wall))
-            if(wall){
-                // console.log(wall.structureType);
-                // console.log(wall.hits);
-                if( (wall.structureType == STRUCTURE_WALL )
-                    && wall.hits < 3100){
-                    wallToRepair = wall;
-                    break;
-                }
+        for(var i = 0 ; i < wallObjects.length ; i++){
+            var wall = wallObjects[i];
+            if(wall.hits < 3100){
+                wallToRepair = wall;
+                break;
             }
-
         }
 
 
