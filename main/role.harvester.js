@@ -24,7 +24,7 @@ var roleHarvester = {
                     //creep.say("move")
                 }
             }else{
-                creep.say("cant find")
+                creep.say("stuckH")
             }
         }
 	}

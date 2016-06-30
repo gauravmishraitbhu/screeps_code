@@ -28,7 +28,7 @@ var roleRepair = {
         // console.log(wallIds.length)
 
         var wallToRepair = null;
-        var wallIds = structureUtils.getWallObjects();
+        var wallIds = structureUtils.getWallObjectIds();
 
         for(var i = 0 ; i< wallIds.length ; i++){
             var wall = Game.getObjectById(wallIds[i]);
@@ -65,7 +65,11 @@ var roleRepair = {
 	    }
 
 	    if(creep.memory.building) {
-	        
+
+            if(wallToRepair == null){
+                creep.say("stuckB");
+            }
+
             if(creep.repair(wallToRepair) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(wallToRepair);
             }
