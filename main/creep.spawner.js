@@ -59,15 +59,14 @@ module.exports = {
         
         // console.log('Room  has '+Game.rooms["E23N26"].energyAvailable+' energy');
 
-
-
         var creepTypeList = creepConfig.getPriorityList();
 
         for(var i=0 ; i<creepTypeList.length ; i++){
             var creepType = creepTypeList[i];
             var currentCount = currentCountMap[creepType];
-            var targetCount = targetBuilderCount[creepType];
-
+            var targetCount = targetCountMap[creepType];
+            // console.log(JSON.stringify(currentCountMap))
+            // console.log(JSON.stringify(targetCountMap))
             if(currentCount < targetCount){
                 var body = creepConfig.getBody(creepType);
                 var result = Game.spawns.Spawn1.createCreep(body , null , {role : creepType})
