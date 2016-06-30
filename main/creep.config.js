@@ -1,4 +1,4 @@
-var creepTypes = require('creep.types')
+var CREEP_TYPES = require('creep.types')
 
 var creepConfig = {
 
@@ -19,7 +19,7 @@ var creepConfig = {
         builder : {
             type : "builder",
             body : [ WORK  , MOVE , CARRY ],
-            count : 1,
+            count : 0,
             priority : 1
         },
 
@@ -77,7 +77,7 @@ module.exports = {
 
     getTargetCountMap : function(){
         var map = {};
-        var creepTypes = [creepTypes.HARVESTER , creepTypes.BUILDER , creepTypes.REPAIR_WALL , creepTypes.UPGRADER];
+        var creepTypes = [CREEP_TYPES.HARVESTER , CREEP_TYPES.BUILDER , CREEP_TYPES.REPAIR_WALL , CREEP_TYPES.UPGRADER];
 
         creepTypes.forEach(function(creepType){
             map[creepType] = creepConfig[controllerLevel][creepType].count
@@ -93,9 +93,9 @@ module.exports = {
         var currentHarvester = 0, currentBuilder = 0, currentUpgrader = 0;
 
         if(currentCountMap){
-            currentHarvester = currentCountMap[creepTypes.HARVESTER];
-            currentBuilder = currentCountMap[creepTypes.BUILDER];
-            currentUpgrader = currentCountMap[creepTypes.UPGRADER]
+            currentHarvester = currentCountMap[CREEP_TYPES.HARVESTER];
+            currentBuilder = currentCountMap[CREEP_TYPES.BUILDER];
+            currentUpgrader = currentCountMap[CREEP_TYPES.UPGRADER]
         }
 
         if(panicRepair){

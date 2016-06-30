@@ -25,9 +25,18 @@ module.exports.loop = function () {
         console.log('Room "'+name+'" has '+Game.rooms[name].energyAvailable+' energy');
         var room = Game.rooms[name];
 
+
         var buildings = room.find(FIND_MY_STRUCTURES , {filter : {structureType : STRUCTURE_CONTROLLER}})
         var controller = buildings[0];
-        creepConfig.setControllerLevel(controller.level);
+
+        var extentionBuilding = room.find(FIND_MY_STRUCTURES , {filter : {structureType : STRUCTURE_EXTENSION}})
+
+        if(extentionBuilding.length == 0){
+            creepConfig.setControllerLevel(1);
+        }else{
+            creepConfig.setControllerLevel(controller.level);
+        }
+
 
         globalConfig.setRoomName(name);
 

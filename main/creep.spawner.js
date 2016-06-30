@@ -58,6 +58,7 @@ module.exports = {
             
         }
 
+        var targetRepairCount = targetCountMap.repair;
         var panicRepair = false;
         if(targetRepairCount == -1){
             var roomName = config.getRoomName();
