@@ -3,7 +3,7 @@ var creepTypes = require('creep.types')
 var creepConfig = {
     harvester : {
         type : "harvester",
-        body : [ WORK , MOVE , MOVE , CARRY ],
+        body : [ WORK , WORK , MOVE , CARRY ],
         priority  : 1
     },
     upgrader : {

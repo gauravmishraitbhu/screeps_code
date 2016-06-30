@@ -16,7 +16,7 @@ module.exports.loop = function () {
         Memory.tickToUpdate ++;
     }
 
-    
+
     for(var name in Memory.creeps) {
         //console.log(JSON.stringify(Game.creeps[name]))
         if(!Game.creeps[name]) {
@@ -24,16 +24,16 @@ module.exports.loop = function () {
             console.log('Clearing non-existing creep memory:', name);
         }
     }
-    
-    spawner.checkAndSpawnCreeps(2,2,5,0);
+
+    spawner.checkAndSpawnCreeps(2,4,4,0);
 
     for(var name in Game.rooms) {
         console.log('Room "'+name+'" has '+Game.rooms[name].energyAvailable+' energy');
         // var walls = Game.rooms[name].find(Game.STRUCTURE_WALL );
         // console.log(walls.length)
     }
-    
-    
+
+
     //terrain.delete();
     var tower = Game.getObjectById('64abad5c27a055500aa64abf');
     if(tower) {
@@ -61,9 +61,9 @@ module.exports.loop = function () {
         if(creep.memory.role == 'builder') {
             roleBuilder.run(creep);
         }
-        
+
         if(creep.memory.role == "repair"){
-            roleRepair.run(creep , Game);
+            roleRepair.run(creep);
         }
     }
 }
