@@ -32,7 +32,7 @@ var roleRepair = {
         //}
 
         var objectToRepair = null;
-        var wallAndRoads = room.find(FIND_STRUCTURES,{
+        var wallAndRoads = creep.room.find(FIND_STRUCTURES,{
             filter : (structure) => (structure.structureType == STRUCTURE_WALL ||
             structure.structureType == STRUCTURE_ROAD)
         })
