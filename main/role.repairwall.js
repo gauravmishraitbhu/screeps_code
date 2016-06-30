@@ -26,33 +26,35 @@ var roleRepair = {
         
         
         // console.log(wallIds.length)
-        
-
-        //for(var i = 0 ; i< wallIds.length ; i++){
-        //    var wall = Game.getObjectById(wallIds[i]);
-        //    //console.log(JSON.stringify(wall))
-        //    if(wall){
-        //        // console.log(wall.structureType);
-        //        // console.log(wall.hits);
-        //        if( (wall.structureType == STRUCTURE_WALL )
-        //            && wall.hits < 3000){
-        //            wallToRepair = wall;
-        //            break;
-        //        }
-        //    }
-        //
-        //}
 
         var wallToRepair = null;
-        var wallObjects = structureUtils.getWallObjects();
+        var wallIds = structureUtils.getWallObjects();
 
-        for( var i=0 ; i<wallObjects.length ; i++ ){
-            var wall = wallObjects[i];
-            if( wall.hits < 3100 ){
-                wallToRepair = wall;
-                break;
+        for(var i = 0 ; i< wallIds.length ; i++){
+            var wall = Game.getObjectById(wallIds[i]);
+            //console.log(JSON.stringify(wall))
+            if(wall){
+                // console.log(wall.structureType);
+                // console.log(wall.hits);
+                if( (wall.structureType == STRUCTURE_WALL )
+                    && wall.hits < 3000){
+                    wallToRepair = wall;
+                    break;
+                }
             }
+
         }
+
+
+
+
+        //for( var i=0 ; i<wallObjects.length ; i++ ){
+        //    var wall = wallObjects[i];
+        //    if( wall.hits < 3100 ){
+        //        wallToRepair = wall;
+        //        break;
+        //    }
+        //}
 
         
         if(creep.memory.building && creep.carry.energy == 0) {

@@ -26,7 +26,7 @@ module.exports = {
 
     },
 
-    getWallObjects : function(){
+    getWallObjectIds : function(){
         var roomData = Memory.roomData;
         var wallObjects = [];
         for( var i=0 ; i<50 ; i++ ){
@@ -34,8 +34,8 @@ module.exports = {
                 var objects = roomData[i][j];
 
                 objects.forEach(function(object){
-                    if(object.type == "structure" && object.structureType == STRUCTURE_WALL){
-                        wallObjects.push(object);
+                    if(object.type == "structure" && object.structure.structureType == STRUCTURE_WALL){
+                        wallObjects.push(object.structure.id);
                     }
                 })
             }
