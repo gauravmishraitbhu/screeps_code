@@ -12,7 +12,7 @@ var creepTypes = require('creep.types')
 var config = require('config')
 
 module.exports = {
-    checkAndSpawnCreeps : function(targetHarvesterCount , targetBuilderCount , targetUpgraderCount,targetRepairCount){
+    checkAndSpawnCreeps : function(targetCountMap){
         
         var harvesterCount = 0;
         var builderCount = 0;
@@ -26,12 +26,12 @@ module.exports = {
             repair : 0
         }
 
-        var targetCountMap = {
-            harvester : targetHarvesterCount,
-            upgrader : targetUpgraderCount,
-            builder : targetBuilderCount ,
-            repair : targetRepairCount
-        }
+        //var targetCountMap = {
+        //    harvester : targetHarvesterCount,
+        //    upgrader : targetUpgraderCount,
+        //    builder : targetBuilderCount ,
+        //    repair : targetRepairCount
+        //}
 
 
         for(var name in Game.creeps) {
@@ -60,7 +60,7 @@ module.exports = {
 
         var panicRepair = false;
         if(targetRepairCount == -1){
-            var roomName = config.ROOM_NAME;
+            var roomName = config.getRoomName();
 
             var room = Game.rooms[roomName];
             var wallAndRoads = room.find(FIND_STRUCTURES,{

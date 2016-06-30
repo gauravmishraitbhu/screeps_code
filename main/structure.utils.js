@@ -3,7 +3,7 @@ var config = require('config')
 
 module.exports = {
     updateStructures : function(){
-        var room = Game.rooms[config.ROOM_NAME];
+        var room = Game.rooms[config.getRoomName()];
 
         //var roomData = room.lookAtArea(0,0,49,49);
         var roomData = {};

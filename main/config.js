@@ -1,5 +1,16 @@
+
+var currentRoomName = "";
+
 module.exports = {
-    ROOM_NAME : "E23N26",
+
+    setRoomName : function(roomName){
+        currentRoomName = roomName;
+    },
+
+    getRoomName : function(){
+        return currentRoomName;
+    },
+
     SOURCES : {
         harvester : 0,
         builder : 1,

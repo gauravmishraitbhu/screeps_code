@@ -1,38 +1,90 @@
 var creepTypes = require('creep.types')
 
 var creepConfig = {
-    harvester : {
-        type : "harvester",
-        body : [ WORK , WORK , MOVE , CARRY ],
-        count : 2,
-        priority  : 1
-    },
-    upgrader : {
-        type : "upgrader",
-        body : [ WORK , WORK , MOVE , CARRY ],
-        count : 4,
-        priority : 2
-    },
 
-    builder : {
-        type : "builder",
-        body : [ WORK , WORK , MOVE , CARRY ],
-        count : 4,
-        priority : 3
-    },
+    1:{
+        harvester : {
+            type : "harvester",
+            body : [ WORK  , MOVE , CARRY ],
+            count : 1,
+            priority  : 1
+        },
+        upgrader : {
+            type : "upgrader",
+            body : [ WORK  , MOVE , CARRY ],
+            count : 2,
+            priority : 1
+        },
 
-    repair : {
-        type : "repair",
-        body : [ WORK , WORK , MOVE , CARRY ] ,
-        count : -1,
-        priority : 4
+        builder : {
+            type : "builder",
+            body : [ WORK  , MOVE , CARRY ],
+            count : 1,
+            priority : 1
+        },
+
+        repair : {
+            type : "repair",
+            body : [ WORK  , MOVE , CARRY ] ,
+            count : 0,
+            priority : 4
+        }
+    },
+    2: {
+        harvester : {
+            type : "harvester",
+            body : [ WORK , WORK , MOVE , CARRY ],
+            count : 2,
+            priority  : 1
+        },
+        upgrader : {
+            type : "upgrader",
+            body : [ WORK , WORK , MOVE , CARRY ],
+            count : 3,
+            priority : 2
+        },
+
+        builder : {
+            type : "builder",
+            body : [ WORK , WORK , MOVE , CARRY ],
+            count : 3,
+            priority : 3
+        },
+
+        repair : {
+            type : "repair",
+            body : [ WORK , WORK , MOVE , CARRY ] ,
+            count : 0,
+            priority : 4
+        }
     }
+
 }
+
+var controllerLevel = "1";
 
 module.exports = {
 
+    setControllerLevel : function(level){
+        controllerLevel =  level.toString();
+    },
+
     getBody : function(creepType){
-        return creepConfig[creepType].body;
+
+
+        return creepConfig[controllerLevel][creepType].body;
+    },
+
+    getTargetCountMap : function(){
+        var map = {};
+        var creepTypes = [creepTypes.HARVESTER , creepTypes.BUILDER , creepTypes.REPAIR_WALL , creepTypes.UPGRADER];
+
+        creepTypes.forEach(function(creepType){
+            map[creepType] = creepConfig[controllerLevel][creepType].count
+        })
+
+        return map;
+
     },
 
     getPriorityList : function(currentCountMap , panicRepair){

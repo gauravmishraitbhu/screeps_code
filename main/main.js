@@ -4,17 +4,13 @@ var roleBuilder = require('role.builder');
 var roleRepair = require('role.repairwall')
 var spawner = require('creep.spawner')
 var structureUtils = require('structure.utils')
+var creepConfig = require('creep.config')
+var globalConfig = require('config');
 
 module.exports.loop = function () {
 
     PathFinder.use(true);
 
-    //if(Memory.tickToUpdate == 50){
-    //    structureUtils.updateStructures();
-    //    Memory.tickToUpdate = 0;
-    //}else{
-    //    Memory.tickToUpdate ++;
-    //}
 
 
     for(var name in Memory.creeps) {
@@ -25,13 +21,22 @@ module.exports.loop = function () {
         }
     }
 
-    spawner.checkAndSpawnCreeps(2,3,3,-1);
-
     for(var name in Game.rooms) {
         console.log('Room "'+name+'" has '+Game.rooms[name].energyAvailable+' energy');
+        var room = Game.rooms[name];
+
+        var buildings = room.find(FIND_MY_STRUCTURES , {filter : {structureType : STRUCTURE_CONTROLLER}})
+        var controller = buildings[0];
+        creepConfig.setControllerLevel(controller.level);
+
+        globalConfig.setRoomName(name);
+
         // var walls = Game.rooms[name].find(Game.STRUCTURE_WALL );
         // console.log(walls.length)
     }
+
+    var creepCounterMap = creepConfig.getTargetCountMap();
+    spawner.checkAndSpawnCreeps(creepCounterMap);
 
 
     //terrain.delete();
