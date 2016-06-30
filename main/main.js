@@ -16,7 +16,7 @@ module.exports.loop = function () {
         }
     }
     
-    spawner.checkAndSpawnCreeps(3,1,5,0);
+    spawner.checkAndSpawnCreeps(2,2,5,0);
 
     for(var name in Game.rooms) {
         console.log('Room "'+name+'" has '+Game.rooms[name].energyAvailable+' energy');

@@ -20,8 +20,7 @@ var roleRepair = {
         "57743a6bcacb65aa0b6e04ae" , "57743a5e0ca7cde20be8bd7a" , "57743a4f82890e62183af12f" , "57743a40b571ea3102dddabb" , "57743a3e81724cda5cc6dc74" ,
         "57743a3b77ff3f570242a1e3" , "57743a39f311811d7eb2eb9f" , "57743a3626c4707202e04fdc" ]
         
-        var constructedBuildings = Object.keys(Memory.constructuredBuildings);
-        wallIds = wallIds.concat(constructedBuildings);
+        
         // console.log(wallIds.length)
         
         var wallToRepair = null;
