@@ -3,10 +3,13 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepair = require('role.repairwall')
 var spawner = require('creep.spawner')
+var structureUtils = require('structure.utils')
 
 module.exports.loop = function () {
-    
-    
+
+    PathFinder.use(true);
+
+   structureUtils.updateStructures();
     
     for(var name in Memory.creeps) {
         //console.log(JSON.stringify(Game.creeps[name]))

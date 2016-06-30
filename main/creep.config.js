@@ -51,5 +51,36 @@ module.exports = {
         }
 
         return ["harvester" , "upgrader" , "builder" , "repair"]
+    },
+
+    getBuildCost: function(creepType){
+        var body = creepConfig[creepType].body
+        var buildCost = 0;
+        for (var index = 0; index < body.length; ++index) {
+            var bodypart = body[index];
+            switch(bodypart){
+                case MOVE:
+                case CARRY:
+                    buildCost+=50;
+                    break;
+                case WORK:
+                    buildCost+=20;
+                    break;
+                case HEAL:
+                    buildCost+=200;
+                    break;
+                case TOUGH:
+                    buildCost+=20;
+                    break;
+                case ATTACK:
+                    buildCost+=80;
+                    break;
+                case RANGED_ATTACK:
+                    buildCost+=150;
+                    break;
+            }
+            console.log(bodypart.toUpperCase()+" costs "+buildCost);
+        }
+        return buildCost;
     }
 }
