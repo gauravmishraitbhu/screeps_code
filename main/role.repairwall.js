@@ -31,13 +31,23 @@ var roleRepair = {
         //
         //}
 
-        var wallToRepair = null;
-        var wallObjects = creep.room.find(FIND_STRUCTURES,{filter:{'structureType':STRUCTURE_WALL}});
+        var objectToRepair = null;
+        var wallAndRoads = room.find(FIND_STRUCTURES,{
+            filter : (structure) => (structure.structureType == STRUCTURE_WALL ||
+            structure.structureType == STRUCTURE_ROAD)
+        })
 
-        for(var i = 0 ; i < wallObjects.length ; i++){
-            var wall = wallObjects[i];
-            if(wall.hits < 3100){
-                wallToRepair = wall;
+        for(var i = 0 ; i < wallAndRoads.length ; i++){
+            let structure = wallAndRoads[i];
+            if(structure.structureType == STRUCTURE_WALL && structure.hits < 3000){
+
+                objectToRepair = structure;
+                break;
+            }
+
+            if(structure.structureType == STRUCTURE_ROAD
+                && structure.hits < structure.hitsMax/2){
+                objectToRepair = structure;
                 break;
             }
         }
@@ -53,12 +63,12 @@ var roleRepair = {
 
 	    if(creep.memory.building) {
 
-            if(wallToRepair == null){
+            if(objectToRepair == null){
                 creep.say("stuckB");
             }
 
-            if(creep.repair(wallToRepair) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(wallToRepair);
+            if(creep.repair(objectToRepair) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(objectToRepair);
             }
             
 	    }
