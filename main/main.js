@@ -9,7 +9,13 @@ module.exports.loop = function () {
 
     PathFinder.use(true);
 
-   structureUtils.updateStructures();
+    if(Memory.tickToUpdate == 50){
+        structureUtils.updateStructures();
+        Memory.tickToUpdate = 0;
+    }else{
+        Memory.tickToUpdate ++;
+    }
+
     
     for(var name in Memory.creeps) {
         //console.log(JSON.stringify(Game.creeps[name]))
