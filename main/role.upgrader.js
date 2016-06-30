@@ -1,3 +1,10 @@
+var config = require('config')
+var creepTypes = require('creep.types')
+
+var creepType = creepTypes.UPGRADER;
+
+
+
 var roleUpgrader = {
 
     /** @param {Creep} creep **/
@@ -17,11 +24,18 @@ var roleUpgrader = {
         }
         else {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1]);
+            var sourceNum = getSourceNum();
+            if(creep.harvest(sources[sourceNum]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[sourceNum]);
             }
         }
 	}
 };
+
+function getSourceNum(){
+    var sourceMap = config.SOURCES;
+    return sourceMap[creepType];
+}
+
 
 module.exports = roleUpgrader;

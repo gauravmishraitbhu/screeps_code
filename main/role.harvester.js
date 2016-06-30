@@ -1,3 +1,8 @@
+var config = require('config')
+var creepTypes = require('creep.types')
+
+var creepType = creepTypes.HARVESTER;
+
 var roleHarvester = {
 
     /** @param {Creep} creep **/
@@ -6,8 +11,9 @@ var roleHarvester = {
 	    if(creep.carry.energy < creep.carryCapacity) {
 	        //creep.say(creep.carry.energy)
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1]);
+            var sourceNum = getSourceNum();
+            if(creep.harvest(sources[sourceNum]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[sourceNum]);
             }
         }
         else {
@@ -29,5 +35,10 @@ var roleHarvester = {
         }
 	}
 };
+
+function getSourceNum(){
+    var sourceMap = config.SOURCES;
+    return sourceMap[creepType];
+}
 
 module.exports = roleHarvester;
