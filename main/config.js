@@ -12,9 +12,9 @@ module.exports = {
     },
 
     SOURCES : {
-        harvester : 0,
+        harvester : 1,
         builder : 0,
-        repair : 1,
+        repair : 0,
         upgrader : 1
     }
 }

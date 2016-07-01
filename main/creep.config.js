@@ -41,7 +41,7 @@ var creepConfig = {
         harvester : {
             type : "harvester",
             body : [ WORK , WORK , MOVE , CARRY ],
-            count : 2,
+            count : 1,
             priority  : 2,
             maxCount : 3
         },
@@ -62,7 +62,7 @@ var creepConfig = {
         repair : {
             type : "repair",
             body : [ WORK , WORK , MOVE , CARRY ] ,
-            count : -1,
+            count : 2,
             priority : 4
         }
     }
