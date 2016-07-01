@@ -43,7 +43,7 @@ var creepConfig = {
             body : [ WORK , WORK , MOVE , CARRY ],
             count : 2,
             priority  : 2,
-            maxCount : 2
+            maxCount : 3
         },
         upgrader : {
             type : "upgrader",
@@ -55,14 +55,14 @@ var creepConfig = {
         builder : {
             type : "builder",
             body : [ WORK , WORK , MOVE , CARRY ],
-            count : 1,
-            priority : 3
+            count : 2,
+            priority : 2
         },
 
         repair : {
             type : "repair",
             body : [ WORK , WORK , MOVE , CARRY ] ,
-            count : 1,
+            count : -1,
             priority : 4
         }
     }
@@ -138,6 +138,10 @@ module.exports = {
             var minExcessType = null;
 
             for( let i = 0 ; i<creepTypeForLevel.length ; i++){
+
+                if( levelConfig[creepType].count < 0 ){
+                    continue;
+                }
                 let creepObject = creepTypeForLevel[i];
                 let creepType = creepObject.type;
 
