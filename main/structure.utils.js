@@ -42,5 +42,12 @@ module.exports = {
         }
 
         return wallObjects;
+    },
+
+    getCurrentEnergetCapacity : function(){
+        var room = Game.rooms[config.getRoomName()];
+        var buildings = room.find(FIND_MY_STRUCTURES , {filter : {structureType : STRUCTURE_EXTENSION}})
+
+        return 300 + buildings.length * 50;
     }
 }

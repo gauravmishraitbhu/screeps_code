@@ -1,4 +1,6 @@
 var CREEP_TYPES = require('creep.types')
+var config = require('config')
+var structureUtils = require('structure.utils')
 
 var creepConfig = {
 
@@ -40,7 +42,8 @@ var creepConfig = {
             type : "harvester",
             body : [ WORK , WORK , MOVE , CARRY ],
             count : 2,
-            priority  : 2
+            priority  : 2,
+            maxCount : 2
         },
         upgrader : {
             type : "upgrader",
@@ -81,14 +84,13 @@ module.exports = {
         if(colonyLevel == 1){
             return 200;
         }else {
-            return getBodyCost([WORK , WORK , CARRY , MOVE]);
+            return getBodyCost(getBodyInternal(CREEP_TYPES.HARVESTER));
         }
     },
 
     getBody : function(creepType){
 
-
-        return creepConfig[colonyLevel][creepType].body;
+        return getBodyInternal(creepType)
     },
 
     getTargetCountMap : function(){
@@ -96,7 +98,7 @@ module.exports = {
         var creepTypes = [CREEP_TYPES.HARVESTER , CREEP_TYPES.BUILDER , CREEP_TYPES.REPAIR_WALL , CREEP_TYPES.UPGRADER];
 
         creepTypes.forEach(function(creepType){
-            map[creepType] = creepConfig[controllerLevel][creepType].count
+            map[creepType] = creepConfig[colonyLevel][creepType].count
         })
 
         return map;
@@ -175,11 +177,32 @@ module.exports = {
         }
 
         return ["harvester" , "upgrader" , "builder" , "repair"]
-    },
-
-    getBuildCost: function(creepType){
-        return creepConfig[colonyLevel][creepType].body
     }
+}
+
+
+function getBodyInternal(creepType){
+    var baseBody = creepConfig[colonyLevel][creepType].body;
+    return getOptmalBodyConfig(baseBody);
+}
+
+function getOptmalBodyConfig(baseBody){
+
+    var newBody = [...baseBody]
+    var energeyCap = structureUtils.getCurrentEnergetCapacity();
+    var currentBodyCost = getBodyCost(baseBody);
+    var balanceEnergy = energeyCap - currentBodyCost;
+
+    if(balanceEnergy >= 100){
+        newBody.push(WORK);
+        balanceEnergy -= 100;
+    }
+
+    if(balanceEnergy >= 50){
+        newBody.push(MOVE);
+    }
+
+    return newBody;
 }
 
 function getBodyCost(body){
@@ -207,7 +230,7 @@ function getBodyCost(body){
                 buildCost+=150;
                 break;
         }
-        console.log(bodypart.toUpperCase()+" costs "+buildCost);
+        //console.log(bodypart.toUpperCase()+" costs "+buildCost);
     }
     return buildCost;
 }
