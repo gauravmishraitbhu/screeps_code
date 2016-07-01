@@ -139,11 +139,13 @@ module.exports = {
 
             for( let i = 0 ; i<creepTypeForLevel.length ; i++){
 
+
+                let creepObject = creepTypeForLevel[i];
+                let creepType = creepObject.type;
+
                 if( levelConfig[creepType].count < 0 ){
                     continue;
                 }
-                let creepObject = creepTypeForLevel[i];
-                let creepType = creepObject.type;
 
                 let excess = currentCountMap[creepType] - levelConfig[creepType].count;
                 if(excess < minExcessCount){

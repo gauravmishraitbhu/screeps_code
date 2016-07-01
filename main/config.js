@@ -13,7 +13,7 @@ module.exports = {
 
     SOURCES : {
         harvester : 0,
-        builder : 1,
+        builder : 0,
         repair : 1,
         upgrader : 1
     }
