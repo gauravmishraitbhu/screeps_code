@@ -136,17 +136,22 @@ module.exports = {
 
             console.log("we already have recommended count going for excess")
             // now  we already have all recommended creeps still we need to decide on next
-            var highestPriCreep = creepTypeForLevel[0];
-            var secondHighest = creepTypeForLevel[1];
 
-            let highestCreepExcess = currentCountMap[highestPriCreep.type] - levelConfig[highestPriCreep.type].count;
-            let secondCreepExcess = currentCountMap[secondHighest.type] - levelConfig[secondHighest.type].count;
+            let minExcessCount = 99999;
+            var minExcessType = null;
 
-            if(highestCreepExcess > secondCreepExcess){
-                nextCreepToSpawn = secondHighest.type;
-            }else{
-                nextCreepToSpawn = highestPriCreep.type;
+            for( let i = 0 ; i<creepTypeForLevel.length ; i++){
+                let creepObject = creepTypeForLevel[i];
+                let creepType = creepObject.type;
+
+                let excess = currentCountMap[creepType] - levelConfig[creepType].count;
+                if(excess < minExcessCount){
+                    minExcessCount = excess;
+                    minExcessType = creepType;
+                }
             }
+
+            nextCreepToSpawn = minExcessType;
 
         }
 
