@@ -21,42 +21,7 @@ var roleRepair = {
             structure.structureType == STRUCTURE_ROAD)
         })
 
-
-        var wallPriority = false;
-        if(Memory.currentLevel <= 2){
-            wallPriority = true;
-        }
-
-        for(var i = 0 ; i < wallAndRoads.length ; i++){
-            let structure = wallAndRoads[i];
-
-            if(wallPriority){
-                if(structure.structureType == STRUCTURE_WALL && structure.hits < 10000){
-                    objectToRepair = structure;
-                    i = wallAndRoads.length;
-                    break;
-                }else if(structure.structureType == STRUCTURE_ROAD
-                    && structure.hits < 0.75 *structure.hitsMax){
-                    objectToRepair = structure;
-                    break;
-                }
-
-            }else{
-
-                if(structure.structureType == STRUCTURE_ROAD
-                    && structure.hits < 0.75 *structure.hitsMax){
-                    objectToRepair = structure;
-                    break;
-                }
-
-                if(structure.structureType == STRUCTURE_WALL && structure.hits < 10000){
-                    objectToRepair = structure;
-                    break;
-                }
-            }
-
-        }
-
+        objectToRepair = getObjectToRepair(wallAndRoads);
 
 
         if(creep.memory.building && creep.carry.energy == 0) {
@@ -90,6 +55,42 @@ var roleRepair = {
 function getSourceNum(){
     var sourceMap = config.SOURCES;
     return sourceMap[creepType];
+}
+
+function getObjectToRepair(wallsAndRoads){
+    var wallPriority = false;
+    if(Memory.currentLevel <= 2){
+        wallPriority = true;
+    }
+
+    var wallToRepair;
+    var roadToRepair;
+    for( let i = 0 ; i < wallsAndRoads.length; i++){
+        let structure = wallsAndRoads[i];
+
+        if(structure.structureType == STRUCTURE_ROAD
+            && structure.hits < 0.75 *structure.hitsMax){
+            roadToRepair = structure;
+            break;
+        }
+    }
+
+
+    for( let i = 0 ; i < wallsAndRoads.length; i++){
+        let structure = wallsAndRoads[i];
+
+        if(structure.structureType == STRUCTURE_WALL && structure.hits < 10000){
+            wallToRepair = structure;
+            break;
+        }
+    }
+
+    if(wallPriority || roadToRepair == null){
+        return wallToRepair;
+    }else {
+        return roadToRepair;
+    }
+
 }
 
 module.exports = roleRepair;
