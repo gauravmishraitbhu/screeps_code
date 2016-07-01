@@ -10,13 +10,13 @@ var creepConfig = {
             type : "harvester",
             body : [ WORK  , MOVE , CARRY ],
             count : 1,
-            priority  : 2
+            priority  : 1
         },
         upgrader : {
             type : "upgrader",
             body : [ WORK  , MOVE , CARRY ],
             count : 2,
-            priority : 1
+            priority : 2
         },
 
         builder : {
@@ -81,11 +81,8 @@ module.exports = {
     },
 
     getCurrentEnergyRequirement(){
-        if(colonyLevel == 1){
-            return 200;
-        }else {
-            return getBodyCost(getBodyInternal(CREEP_TYPES.HARVESTER));
-        }
+        return getBodyCost(getBodyInternal(CREEP_TYPES.HARVESTER));
+
     },
 
     getBody : function(creepType){
