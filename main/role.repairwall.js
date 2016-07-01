@@ -43,7 +43,7 @@ var roleRepair = {
             let structure = wallAndRoads[i];
 
             if(structure.structureType == STRUCTURE_ROAD
-                && structure.hits < structure.hitsMax/2){
+                && structure.hits < 0.75 *structure.hitsMax){
                 objectToRepair = structure;
                 break;
             }

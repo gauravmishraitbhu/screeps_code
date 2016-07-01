@@ -54,7 +54,7 @@ var creepConfig = {
         repair : {
             type : "repair",
             body : [ WORK , WORK , MOVE , CARRY ] ,
-            count : 2,
+            count : 4,
             priority : 4
         }
     }
