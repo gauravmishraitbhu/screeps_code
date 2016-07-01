@@ -14,22 +14,6 @@ var roleRepair = {
         // console.log(wallIds.length)
 
 
-        //var wallIds = structureUtils.getWallObjectIds();
-        //
-        //for(var i = 0 ; i< wallIds.length ; i++){
-        //    var wall = Game.getObjectById(wallIds[i]);
-        //    //console.log(JSON.stringify(wall))
-        //    if(wall){
-        //        // console.log(wall.structureType);
-        //        // console.log(wall.hits);
-        //        if( (wall.structureType == STRUCTURE_WALL )
-        //            && wall.hits < 3100){
-        //            wallToRepair = wall;
-        //            break;
-        //        }
-        //    }
-        //
-        //}
 
         var objectToRepair = null;
         var wallAndRoads = creep.room.find(FIND_STRUCTURES,{
@@ -38,21 +22,38 @@ var roleRepair = {
         })
 
 
+        var wallPriority = false;
+        if(Memory.currentLevel <= 2){
+            wallPriority = true;
+        }
 
         for(var i = 0 ; i < wallAndRoads.length ; i++){
             let structure = wallAndRoads[i];
 
-            if(structure.structureType == STRUCTURE_ROAD
-                && structure.hits < 0.75 *structure.hitsMax){
-                objectToRepair = structure;
-                break;
-            }
+            if(wallPriority){
+                if(structure.structureType == STRUCTURE_WALL && structure.hits < 10000){
+                    objectToRepair = structure;
+                    break;
+                }
 
-            if(structure.structureType == STRUCTURE_WALL && structure.hits < 50000){
-                objectToRepair = structure;
-                break;
-            }
+                if(structure.structureType == STRUCTURE_ROAD
+                    && structure.hits < 0.75 *structure.hitsMax){
+                    objectToRepair = structure;
+                    break;
+                }
+            }else{
 
+                if(structure.structureType == STRUCTURE_ROAD
+                    && structure.hits < 0.75 *structure.hitsMax){
+                    objectToRepair = structure;
+                    break;
+                }
+
+                if(structure.structureType == STRUCTURE_WALL && structure.hits < 10000){
+                    objectToRepair = structure;
+                    break;
+                }
+            }
 
         }
 

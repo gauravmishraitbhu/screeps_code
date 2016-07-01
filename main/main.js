@@ -30,7 +30,7 @@ module.exports.loop = function () {
         var controller = buildings[0];
 
         var extentionBuilding = room.find(FIND_MY_STRUCTURES , {filter : {structureType : STRUCTURE_EXTENSION}})
-
+        Memory.currentLevel = controller.level;
         if(extentionBuilding.length == 0){
             creepConfig.setControllerLevel(1);
         }else{
