@@ -62,7 +62,8 @@ module.exports = {
 
         }
         total = harvesterCount + upgraderCount + builderCount + repairCouter;
-        if(total > 15){
+        if(total > 12){
+            console.log("more than 12 already")
             return;
         }
         var nextCreepType = creepConfig.getNextCreepTypeToSpawn(currentCountMap);

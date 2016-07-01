@@ -41,29 +41,29 @@ var creepConfig = {
         harvester : {
             type : "harvester",
             body : [ WORK , WORK , MOVE , CARRY ],
-            count : 1,
-            priority  : 2,
+            count : 2,
+            priority  : 3,
             maxCount : 3
         },
         upgrader : {
             type : "upgrader",
-            body : [ WORK , WORK , MOVE , CARRY ],
-            count : 3,
+            body : [ WORK , MOVE , MOVE , CARRY ],
+            count : 5,
             priority : 1
         },
 
         builder : {
             type : "builder",
             body : [ WORK , WORK , MOVE , CARRY ],
-            count : 2,
-            priority : 2
+            count : 1,
+            priority : 4
         },
 
         repair : {
             type : "repair",
-            body : [ WORK , WORK , MOVE , CARRY ] ,
+            body : [ WORK , MOVE , MOVE , CARRY ] ,
             count : 2,
-            priority : 4
+            priority : 2
         }
     }
 
@@ -196,6 +196,7 @@ function getBodyInternal(creepType){
 
 function getOptmalBodyConfig(baseBody){
 
+    return [WORK , WORK , WORK ,WORK ,CARRY , CARRY, MOVE]
     var newBody = [...baseBody]
     var energeyCap = structureUtils.getCurrentEnergetCapacity();
     var currentBodyCost = getBodyCost(baseBody);
