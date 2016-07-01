@@ -22,7 +22,7 @@ var creepConfig = {
         builder : {
             type : "builder",
             body : [ WORK  , MOVE , CARRY ],
-            count : 2,
+            count : 0,
             priority : 3
         },
 
