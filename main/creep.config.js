@@ -19,7 +19,7 @@ var creepConfig = {
         builder : {
             type : "builder",
             body : [ WORK  , MOVE , CARRY ],
-            count : 2,
+            count : 4,
             priority : 1
         },
 
@@ -54,7 +54,7 @@ var creepConfig = {
         repair : {
             type : "repair",
             body : [ WORK , WORK , MOVE , CARRY ] ,
-            count : -1,
+            count : 2,
             priority : 4
         }
     }

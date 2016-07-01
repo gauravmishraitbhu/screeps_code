@@ -37,31 +37,33 @@ var roleRepair = {
             structure.structureType == STRUCTURE_ROAD)
         })
 
+        if(structure.structureType == STRUCTURE_ROAD
+            && structure.hits < structure.hitsMax/2){
+            objectToRepair = structure;
+            break;
+        }
+
         for(var i = 0 ; i < wallAndRoads.length ; i++){
             let structure = wallAndRoads[i];
-            if(structure.structureType == STRUCTURE_WALL && structure.hits < 5000){
+            if(structure.structureType == STRUCTURE_WALL && structure.hits < 50000){
 
                 objectToRepair = structure;
                 break;
             }
 
-            if(structure.structureType == STRUCTURE_ROAD
-                && structure.hits < structure.hitsMax/2){
-                objectToRepair = structure;
-                break;
-            }
+
         }
 
 
-        
+
         if(creep.memory.building && creep.carry.energy == 0) {
             creep.memory.building = false;
-	    }
-	    if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
-	        creep.memory.building = true;
-	    }
+        }
+        if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.building = true;
+        }
 
-	    if(creep.memory.building) {
+        if(creep.memory.building) {
 
             if(objectToRepair == null){
                 creep.say("stuckB");
@@ -70,16 +72,16 @@ var roleRepair = {
             if(creep.repair(objectToRepair) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(objectToRepair);
             }
-            
-	    }
-	    else {
-	        var sources = creep.room.find(FIND_SOURCES);
+
+        }
+        else {
+            var sources = creep.room.find(FIND_SOURCES);
             var sourceNum = getSourceNum();
             if(creep.harvest(sources[sourceNum]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(sources[sourceNum]);
             }
-	    }
-	}
+        }
+    }
 };
 
 function getSourceNum(){
