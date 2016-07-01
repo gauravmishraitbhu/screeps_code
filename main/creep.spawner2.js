@@ -36,7 +36,7 @@ module.exports = {
             repair : 0
         }
 
-
+        var total = 0;
 
         for(var name in Game.creeps) {
 
@@ -61,7 +61,10 @@ module.exports = {
             }
 
         }
-
+        total = harvesterCount + upgraderCount + builderCount + repairCouter;
+        if(total > 15){
+            return;
+        }
         var nextCreepType = creepConfig.getNextCreepTypeToSpawn(currentCountMap);
 
         var body = creepConfig.getBody(nextCreepType);
