@@ -2,7 +2,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepair = require('role.repairwall')
-var spawner = require('creep.spawner')
+var spawner = require('creep.spawner2')
 var structureUtils = require('structure.utils')
 var creepConfig = require('creep.config')
 var globalConfig = require('config');
@@ -29,13 +29,10 @@ module.exports.loop = function () {
         var buildings = room.find(FIND_MY_STRUCTURES , {filter : {structureType : STRUCTURE_CONTROLLER}})
         var controller = buildings[0];
 
-        var extentionBuilding = room.find(FIND_MY_STRUCTURES , {filter : {structureType : STRUCTURE_EXTENSION}})
+
         Memory.currentLevel = controller.level;
-        if(extentionBuilding.length == 0){
-            creepConfig.setControllerLevel(1);
-        }else{
-            creepConfig.setControllerLevel(controller.level);
-        }
+
+        creepConfig.setControllerLevel(controller.level);
 
 
         globalConfig.setRoomName(name);

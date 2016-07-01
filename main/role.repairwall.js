@@ -33,14 +33,14 @@ var roleRepair = {
             if(wallPriority){
                 if(structure.structureType == STRUCTURE_WALL && structure.hits < 10000){
                     objectToRepair = structure;
+                    i = wallAndRoads.length;
                     break;
-                }
-
-                if(structure.structureType == STRUCTURE_ROAD
+                }else if(structure.structureType == STRUCTURE_ROAD
                     && structure.hits < 0.75 *structure.hitsMax){
                     objectToRepair = structure;
                     break;
                 }
+
             }else{
 
                 if(structure.structureType == STRUCTURE_ROAD
