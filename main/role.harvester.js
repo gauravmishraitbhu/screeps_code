@@ -3,11 +3,6 @@ var creepTypes = require('creep.types')
 
 var creepType = creepTypes.HARVESTER;
 
-var HARVESTER_PRIORITY = {
-    STRUCTURE_EXTENSION : 1,
-    STRUCTURE_SPAWN : 2,
-    STRUCTURE_TOWER : 3
-}
 
 var roleHarvester = {
 
@@ -30,6 +25,12 @@ var roleHarvester = {
                                 structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
                     }
             });
+
+            var HARVESTER_PRIORITY = {
+            }
+            HARVESTER_PRIORITY[STRUCTURE_EXTENSION] = 1;
+            HARVESTER_PRIORITY[STRUCTURE_SPAWN] = 2;
+            HARVESTER_PRIORITY[STRUCTURE_TOWER] = 3;
 
             //prioritize extention then spawn then tower
             targets.sort(function(target1 , target2){

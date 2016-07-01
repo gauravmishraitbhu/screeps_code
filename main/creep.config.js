@@ -48,7 +48,7 @@ var creepConfig = {
         upgrader : {
             type : "upgrader",
             body : [ WORK , WORK , MOVE , CARRY ],
-            count : 4,
+            count : 3,
             priority : 1
         },
 
@@ -62,7 +62,7 @@ var creepConfig = {
         repair : {
             type : "repair",
             body : [ WORK , WORK , MOVE , CARRY ] ,
-            count : 0,
+            count : 1,
             priority : 4
         }
     }

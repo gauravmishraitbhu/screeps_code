@@ -22,7 +22,11 @@ module.exports.loop = function () {
     }
 
     for(var name in Game.rooms) {
-        console.log('Room "'+name+'" has '+Game.rooms[name].energyAvailable+' energy');
+
+        if(Game.rooms[name].energyAvailable % 10 == 0){
+            console.log('Room "'+name+'" has '+Game.rooms[name].energyAvailable+' energy');
+        }
+
         var room = Game.rooms[name];
 
 
