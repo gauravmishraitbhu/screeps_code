@@ -9,7 +9,7 @@ var roleHarvester = {
     /** @param {Creep} creep **/
     run: function(creep) {
         //creep.say("cap---"+creep.carryCapacity)
-	    if(creep.carry.energy < creep.carryCapacity) {
+	    if(creep.carry.energy == 0) {
 	        //creep.say(creep.carry.energy)
             var sources = creep.room.find(FIND_SOURCES);
             var sourceNum = getSourceNum();
