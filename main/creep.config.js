@@ -72,6 +72,40 @@ var creepConfig = {
             priority : 4,
             maxCount : 2
         }
+    },
+
+
+    3: {
+        harvester : {
+            type : "harvester",
+            body : [ WORK , WORK , MOVE , CARRY ],
+            count : 2,
+            priority  : 1,
+            maxCount : 3
+        },
+        upgrader : {
+            type : "upgrader",
+            body : [ WORK , MOVE , MOVE , CARRY ],
+            count : 2,
+            priority : 2,
+            maxCount : 4
+        },
+
+        builder : {
+            type : "builder",
+            body : [ WORK , WORK , MOVE , CARRY ],
+            count : 3,
+            priority : 3,
+            maxCount : 4
+        },
+
+        repair : {
+            type : "repair",
+            body : [ WORK , MOVE , MOVE , CARRY ] ,
+            count : 0,
+            priority : 4,
+            maxCount : 1
+        }
     }
 
 }
@@ -81,8 +115,8 @@ var colonyLevel = "1";
 module.exports = {
 
     setControllerLevel : function(level){
-        if(level > 2){
-            level = 2;
+        if(level > 3){
+            level = 3;
         }
         colonyLevel =  level.toString();
     },
@@ -227,6 +261,9 @@ function getOptmalBodyConfig(baseBody){
             newBody = [WORK , WORK , WORK , WORK , CARRY , MOVE]
             break;
         case 550:
+            newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE];
+            break;
+        default:
             newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE];
             break;
     }

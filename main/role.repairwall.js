@@ -85,7 +85,7 @@ function getObjectToRepair(wallsAndRoads){
         }
     }
 
-    if(wallPriority || roadToRepair == null){
+    if(wallPriority && wallToRepair != null){
         return wallToRepair;
     }else {
         return roadToRepair;
