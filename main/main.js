@@ -6,6 +6,7 @@ var spawner = require('creep.spawner2')
 var structureUtils = require('structure.utils')
 var creepConfig = require('creep.config')
 var globalConfig = require('config');
+var towerController = require('towerController')
 
 module.exports.loop = function () {
 
@@ -50,19 +51,9 @@ module.exports.loop = function () {
 
 
     //terrain.delete();
-    var tower = Game.getObjectById('64abad5c27a055500aa64abf');
+    var tower = Game.getObjectById('5777e19ce98dffe17bf23dda');
     if(tower) {
-        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax
-        });
-        if(closestDamagedStructure) {
-            tower.repair(closestDamagedStructure);
-        }
-
-        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        if(closestHostile) {
-            tower.attack(closestHostile);
-        }
+        towerController.run(tower);
     }
 
     for(var name in Game.creeps) {
