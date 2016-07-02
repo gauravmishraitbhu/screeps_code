@@ -252,20 +252,25 @@ function getOptmalBodyConfig(baseBody){
             newBody = [WORK , WORK , CARRY , MOVE];
             break;
         case 400:
-            newBody = [WORK , WORK , WORK , MOVE , CARRY]
+            newBody = [WORK , WORK , MOVE , MOVE , CARRY]
             break;
         case 450:
-            newBody = [WORK , WORK , WORK , MOVE , CARRY ,CARRY]
+            newBody = [WORK , WORK , WORK , MOVE , MOVE ,CARRY]
             break;
         case 500:
-            newBody = [WORK , WORK , WORK , WORK , CARRY , MOVE]
+            newBody = [WORK , WORK , WORK , CARRY ,CARRY, MOVE , MOVE]
             break;
         case 550:
+            newBody = [WORK , WORK , WORK , CARRY,CARRY , MOVE , MOVE]
+            break;
         case 600:
-            newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE]
+            newBody = [WORK , WORK , WORK ,WORK, CARRY,CARRY , MOVE , MOVE]
             break;
         case 650:
-            newBody = [WORK , WORK , WORK , WORK , CARRY , CARRY ,MOVE, MOVE]
+            newBody = [WORK , WORK , WORK , WORK , CARRY ,CARRY ,MOVE, MOVE , MOVE]
+            break;
+        case 700:
+            newBody = [WORK , WORK , WORK , WORK , CARRY ,CARRY , MOVE ,MOVE, MOVE , MOVE]
             break;
         default:
             newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE];
