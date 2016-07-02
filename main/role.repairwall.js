@@ -35,6 +35,7 @@ var roleRepair = {
 
             if(objectToRepair == null){
                 creep.say("stuckB");
+                creep.memory.role = "upgrader";
             }
 
             if(creep.repair(objectToRepair) == ERR_NOT_IN_RANGE) {

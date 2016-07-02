@@ -86,7 +86,7 @@ var creepConfig = {
         upgrader : {
             type : "upgrader",
             body : [ WORK , MOVE , MOVE , CARRY ],
-            count : 1,
+            count : 2,
             priority : 2,
             maxCount : 4
         },
@@ -94,7 +94,7 @@ var creepConfig = {
         builder : {
             type : "builder",
             body : [ WORK , WORK , MOVE , CARRY ],
-            count : 2,
+            count : 3,
             priority : 3,
             maxCount : 4
         },
