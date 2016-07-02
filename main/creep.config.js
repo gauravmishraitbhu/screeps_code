@@ -272,6 +272,12 @@ function getOptmalBodyConfig(baseBody){
         case 700:
             newBody = [WORK , WORK , WORK , WORK , CARRY ,CARRY , MOVE ,MOVE, MOVE , MOVE]
             break;
+        case 750:
+            newBody = [WORK , WORK , WORK , WORK ,CARRY , CARRY ,CARRY , MOVE ,MOVE, MOVE , MOVE]
+            break;
+        case 800:
+            newBody = [WORK , WORK , WORK , WORK , CARRY ,CARRY , MOVE ,MOVE, MOVE , MOVE , MOVE]
+            break;
         default:
             newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE];
             break;
