@@ -86,7 +86,7 @@ var creepConfig = {
         upgrader : {
             type : "upgrader",
             body : [ WORK , MOVE , MOVE , CARRY ],
-            count : 2,
+            count : 1,
             priority : 2,
             maxCount : 4
         },
@@ -94,7 +94,7 @@ var creepConfig = {
         builder : {
             type : "builder",
             body : [ WORK , WORK , MOVE , CARRY ],
-            count : 3,
+            count : 4,
             priority : 3,
             maxCount : 4
         },
@@ -243,7 +243,6 @@ function getBodyInternal(creepType){
 
 function getOptmalBodyConfig(baseBody){
 
-    return [WORK , WORK , WORK ,WORK ,CARRY , CARRY, MOVE]
     var newBody = [...baseBody]
     var energeyCap = structureUtils.getCurrentEnergetCapacity();
 
