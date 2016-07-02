@@ -10,27 +10,31 @@ var creepConfig = {
             type : "harvester",
             body : [ WORK  , MOVE , CARRY ],
             count : 1,
-            priority  : 1
+            priority  : 1,
+            maxCount : 2,
         },
         upgrader : {
             type : "upgrader",
             body : [ WORK  , MOVE , CARRY ],
             count : 2,
-            priority : 2
+            priority : 2,
+            maxCount : 4
         },
 
         builder : {
             type : "builder",
             body : [ WORK  , MOVE , CARRY ],
             count : 0,
-            priority : 3
+            priority : 3,
+            maxCount : 0
         },
 
         repair : {
             type : "repair",
             body : [ WORK  , MOVE , CARRY ] ,
             count : 0,
-            priority : 4
+            priority : 4,
+            maxCount : 0
         }
     },
 
@@ -42,28 +46,31 @@ var creepConfig = {
             type : "harvester",
             body : [ WORK , WORK , MOVE , CARRY ],
             count : 2,
-            priority  : 3,
+            priority  : 1,
             maxCount : 3
         },
         upgrader : {
             type : "upgrader",
             body : [ WORK , MOVE , MOVE , CARRY ],
-            count : 5,
-            priority : 1
+            count : 2,
+            priority : 2,
+            maxCount : 5
         },
 
         builder : {
             type : "builder",
             body : [ WORK , WORK , MOVE , CARRY ],
             count : 1,
-            priority : 4
+            priority : 3,
+            maxCount : 2
         },
 
         repair : {
             type : "repair",
             body : [ WORK , MOVE , MOVE , CARRY ] ,
             count : 2,
-            priority : 2
+            priority : 4,
+            maxCount : 2
         }
     }
 
@@ -142,8 +149,13 @@ module.exports = {
 
                 let creepObject = creepTypeForLevel[i];
                 let creepType = creepObject.type;
+                let maxCount = levelConfig[creepType].maxCount;
+                if(maxCount == null){
+                    maxCount = 9999;
+                }
 
-                if( levelConfig[creepType].count < 0 ){
+                // if config has count < 0 that means never spawn this creep.
+                if( levelConfig[creepType].count < 0 || maxCount >= currentCountMap[creepType]){
                     continue;
                 }
 
@@ -199,17 +211,26 @@ function getOptmalBodyConfig(baseBody){
     return [WORK , WORK , WORK ,WORK ,CARRY , CARRY, MOVE]
     var newBody = [...baseBody]
     var energeyCap = structureUtils.getCurrentEnergetCapacity();
-    var currentBodyCost = getBodyCost(baseBody);
-    var balanceEnergy = energeyCap - currentBodyCost;
 
-    if(balanceEnergy >= 100){
-        newBody.push(WORK);
-        balanceEnergy -= 100;
+    switch(energeyCap){
+        case 300:
+        case 350:
+            newBody = [WORK , WORK , CARRY , MOVE];
+            break;
+        case 400:
+            newBody = [WORK , WORK , WORK , MOVE , CARRY]
+            break;
+        case 450:
+            newBody = [WORK , WORK , WORK , MOVE , CARRY ,CARRY]
+            break;
+        case 500:
+            newBody = [WORK , WORK , WORK , WORK , CARRY , MOVE]
+            break;
+        case 550:
+            newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE];
+            break;
     }
 
-    if(balanceEnergy >= 50){
-        newBody.push(MOVE);
-    }
 
     return newBody;
 }

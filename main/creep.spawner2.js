@@ -62,11 +62,13 @@ module.exports = {
 
         }
         total = harvesterCount + upgraderCount + builderCount + repairCouter;
-        if(total > 12){
-            console.log("more than 12 already")
+
+        var nextCreepType = creepConfig.getNextCreepTypeToSpawn(currentCountMap);
+
+        if(nextCreepType == null){
+            console.log("next creep returned null")
             return;
         }
-        var nextCreepType = creepConfig.getNextCreepTypeToSpawn(currentCountMap);
 
         var body = creepConfig.getBody(nextCreepType);
         var result = Game.spawns.Spawn1.createCreep(body , null , {role : nextCreepType})
