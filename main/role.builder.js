@@ -40,7 +40,9 @@ var roleBuilder = {
                     creep.moveTo(targets[0]);
                     
                 }
-            }
+            }else{
+				creep.memory.role = "upgrader";
+			}
 	    }
 	    else {
 	        //creep.say("harvest")
