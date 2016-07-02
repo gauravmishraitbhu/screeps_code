@@ -160,6 +160,7 @@ module.exports = {
             return creepObject1.priority - creepObject2.priority;
         })
 
+
         //first check if any creep is below recommended number
         for( let i=0;i<creepTypeForLevel.length ; i++){
             let creepObject = creepTypeForLevel[i];
@@ -261,7 +262,11 @@ function getOptmalBodyConfig(baseBody){
             newBody = [WORK , WORK , WORK , WORK , CARRY , MOVE]
             break;
         case 550:
-            newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE];
+        case 600:
+            newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE]
+            break;
+        case 650:
+            newBody = [WORK , WORK , WORK , WORK , WORK , CARRY , CARRY , MOVE]
             break;
         default:
             newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE];
