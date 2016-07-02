@@ -94,7 +94,7 @@ var creepConfig = {
         builder : {
             type : "builder",
             body : [ WORK , WORK , MOVE , CARRY ],
-            count : 4,
+            count : 2,
             priority : 3,
             maxCount : 4
         },
@@ -102,7 +102,7 @@ var creepConfig = {
         repair : {
             type : "repair",
             body : [ WORK , MOVE , MOVE , CARRY ] ,
-            count : 0,
+            count : 1,
             priority : 4,
             maxCount : 1
         }
@@ -265,7 +265,7 @@ function getOptmalBodyConfig(baseBody){
             newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE]
             break;
         case 650:
-            newBody = [WORK , WORK , WORK , WORK , WORK , CARRY , CARRY , MOVE]
+            newBody = [WORK , WORK , WORK , WORK , CARRY , CARRY ,MOVE, MOVE]
             break;
         default:
             newBody = [WORK , WORK , WORK , WORK,CARRY , CARRY , MOVE];
