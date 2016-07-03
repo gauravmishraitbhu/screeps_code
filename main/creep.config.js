@@ -104,7 +104,7 @@ var creepConfig = {
             body : [ WORK , MOVE , MOVE , CARRY ] ,
             count : 1,
             priority : 4,
-            maxCount : 1
+            maxCount : 2
         }
     }
 
@@ -190,7 +190,7 @@ module.exports = {
                 }
 
                 // if config has count < 0 that means never spawn this creep.
-                if( levelConfig[creepType].count < 0 || maxCount >= currentCountMap[creepType]){
+                if( levelConfig[creepType].count < 0 || maxCount <= currentCountMap[creepType]){
                     continue;
                 }
 
