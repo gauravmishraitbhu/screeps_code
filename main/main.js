@@ -1,26 +1,18 @@
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
-var roleRepair = require('role.repairwall')
+var CreepManager = require('CreepManager')
 var spawner = require('creep.spawner2')
 var structureUtils = require('structure.utils')
 var creepConfig = require('creep.config')
 var globalConfig = require('config');
 var towerController = require('towerController')
+var StructureManager = require('StructureManager')
 
 module.exports.loop = function () {
 
     PathFinder.use(true);
 
+    StructureManager.updateStructureList();
 
-
-    for(var name in Memory.creeps) {
-        //console.log(JSON.stringify(Game.creeps[name]))
-        if(!Game.creeps[name]) {
-            delete Memory.creeps[name];
-            console.log('Clearing non-existing creep memory:', name);
-        }
-    }
+    CreepManager.freeDeadCreepMemory();
 
     for(var name in Game.rooms) {
 
@@ -56,20 +48,5 @@ module.exports.loop = function () {
         towerController.run(tower);
     }
 
-    for(var name in Game.creeps) {
-        var creep = Game.creeps[name];
-        if(creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
-        }
-        if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        }
-        if(creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
-        }
-
-        if(creep.memory.role == "repair"){
-            roleRepair.run(creep);
-        }
-    }
+    CreepManager.processNextTick();
 }

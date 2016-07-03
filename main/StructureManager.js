@@ -1,5 +1,6 @@
 
 var structuresByType = {};
+var constructionSitesByType = {};
 
 module.exports = {
 
@@ -10,19 +11,40 @@ module.exports = {
 
             var room = Game.rooms[name];
 
-            var structures = creep.room.find(FIND_STRUCTURES)
+            var structures = room.find(FIND_STRUCTURES)
 
             structures.forEach(function(structure){
-                if( ! structuresByType[structure.structureType] ){
+                if( !structuresByType[structure.structureType] ){
                     structuresByType[structure.structureType] = []
                 }
 
                 structuresByType[structure.structureType].push(structure);
             })
+
+            var constructionSites = room.find(FIND_CONSTRUCTION_SITES);
+
+            constructionSites.forEach(function(constructionSite){
+
+                if( !constructionSitesByType[constructionSite.structureType] ){
+                    constructionSitesByType[constructionSite.structureType] = []
+                }
+
+                !constructionSitesByType[constructionSite.structureType].push(constructionSite);
+
+            })
         }
     },
 
+    /**
+     * returns all structures including walls and roads
+     * @param type
+     * @returns {*}
+     */
     getStructuresOfType : function(type){
         return structuresByType[type];
+    },
+
+    getConstructionSiteByType : function(type){
+        return constructionSitesByType[type];
     }
 }

@@ -1,6 +1,6 @@
 module.exports = {
     HARVESTER : "harvester",
     BUILDER : "builder",
-    REPAIR_WALL : "repair",
+    REPAIR : "repair",
     UPGRADER : "upgrader"
 }

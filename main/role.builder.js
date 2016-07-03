@@ -41,7 +41,8 @@ var roleBuilder = {
                     
                 }
             }else{
-				creep.memory.role = "upgrader";
+				creep.say("stuckB")
+				//creep.memory.role = "upgrader";
 			}
 	    }
 	    else {
