@@ -55,7 +55,7 @@ module.exports = {
         var harvesterCreeps = creepListByType[CREEP_TYPES.HARVESTER]
 
         harvesterCreeps.forEach(function(creep){
-            roleHarvester.run(creep);
+            harvesterController.run(creep);
         })
 
 

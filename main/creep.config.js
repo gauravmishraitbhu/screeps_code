@@ -133,7 +133,7 @@ module.exports = {
 
     getTargetCountMap : function(){
         var map = {};
-        var creepTypes = [CREEP_TYPES.HARVESTER , CREEP_TYPES.BUILDER , CREEP_TYPES.REPAIR_WALL , CREEP_TYPES.UPGRADER];
+        var creepTypes = [CREEP_TYPES.HARVESTER , CREEP_TYPES.BUILDER , CREEP_TYPES.REPAIR , CREEP_TYPES.UPGRADER];
 
         creepTypes.forEach(function(creepType){
             map[creepType] = creepConfig[colonyLevel][creepType].count

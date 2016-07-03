@@ -13,6 +13,7 @@ module.exports.loop = function () {
     StructureManager.updateStructureList();
 
     CreepManager.freeDeadCreepMemory();
+    CreepManager.updateCreepInfo();
 
     for(var name in Game.rooms) {
 
