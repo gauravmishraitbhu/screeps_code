@@ -16,28 +16,12 @@ var roleBuilder = {
 
 	    if(creep.memory.building) {
 	        //creep.say("building")
-	        var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+			var currentTargetId = creep.memory.currentTargetId;
+			let currentTarget = Game.getObjectById(currentTargetId);
 
-
-			var BUILDER_PRIORITY = {
-			}
-			BUILDER_PRIORITY[STRUCTURE_TOWER] = 1
-			BUILDER_PRIORITY[STRUCTURE_EXTENSION] = 2;
-			BUILDER_PRIORITY[STRUCTURE_WALL] = 3;
-			BUILDER_PRIORITY[STRUCTURE_ROAD] = 4;
-
-			//prioritize extention then spawn then tower
-			targets.sort(function(target1 , target2){
-				let priority1 = BUILDER_PRIORITY[target1.structureType];
-				let priority2 = BUILDER_PRIORITY[target2.structureType];
-
-				return priority1 - priority2;
-			})
-
-
-			if(targets.length) {
-                if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
+			if(currentTarget) {
+                if(creep.build(currentTarget) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(currentTarget);
                     
                 }
             }else{

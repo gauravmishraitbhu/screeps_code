@@ -3,7 +3,7 @@ var structureUtils = require('structure.utils')
 var config = require('config')
 var creepTypes = require('creep.types')
 
-var creepType = creepTypes.REPAIR_WALL;
+var _creepType = creepTypes.REPAIR;
 
 
 var roleRepair = {
@@ -55,7 +55,7 @@ var roleRepair = {
 
 function getSourceNum(){
     var sourceMap = config.SOURCES;
-    return sourceMap[creepType];
+    return sourceMap[_creepType];
 }
 
 function getObjectToRepair(wallsAndRoads){

@@ -78,6 +78,17 @@ module.exports = {
         //builder creeps
         var builderCreeps = creepListByType[CREEP_TYPES.BUILDER]
         builderCreeps.forEach(function(creep){
+
+            if(creep.memory.currentTargetId){
+                let currentTargetId = creep.memory.currentTargetId;
+                let targetSite = Game.getObjectById(currentTargetId);
+
+                if( !(targetSite && targetSite.progress < targetSite.progressTotal) ){
+                    creep.memory.currentTargetId = getNextTargetToBuild();
+                }
+            }else{
+                creep.memory.currentTargetId = getNextTargetToBuild();
+            }
             builderController.run(creep);
         })
 
@@ -113,5 +124,21 @@ function getNextTargetToHarvest(){
         return priority1 - priority2;
     })
 
-    return structures[0].id;
+    if(structures.length > 0){
+        return structures[0].id;
+    }else {
+        return null
+    }
+}
+
+function getNextTargetToBuild(){
+    var sortOrder = [STRUCTURE_TOWER , STRUCTURE_EXTENSION , STRUCTURE_WALL , STRUCTURE_ROAD ]
+    var constructionSites = StructureManager.getAllConstructionSites(sortOrder)
+
+    if(constructionSites.length > 0){
+        return constructionSites[0].id
+    }else{
+        return null
+    }
+
 }
