@@ -80,7 +80,7 @@ function getObjectToRepair(wallsAndRoads){
     for( let i = 0 ; i < wallsAndRoads.length; i++){
         let structure = wallsAndRoads[i];
 
-        if(structure.structureType == STRUCTURE_WALL && structure.hits < 20000){
+        if(structure.structureType == STRUCTURE_WALL && structure.hits < 100 * 1000){
             wallToRepair = structure;
             break;
         }
@@ -88,8 +88,10 @@ function getObjectToRepair(wallsAndRoads){
 
     if(wallPriority && wallToRepair != null){
         return wallToRepair;
-    }else {
+    }else if(roadToRepair != null){
         return roadToRepair;
+    }else{
+        return wallToRepair;
     }
 
 }

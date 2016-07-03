@@ -24,7 +24,7 @@ module.exports.loop = function () {
 
     for(var name in Game.rooms) {
 
-        if(Game.rooms[name].energyAvailable % 10 == 0){
+        if(Game.time % 10 == 0){
             console.log('Room "'+name+'" has '+Game.rooms[name].energyAvailable+' energy');
         }
 

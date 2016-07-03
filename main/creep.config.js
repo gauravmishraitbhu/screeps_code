@@ -81,22 +81,22 @@ var creepConfig = {
             body : [ WORK , WORK , MOVE , CARRY ],
             count : 2,
             priority  : 1,
-            maxCount : 3
+            maxCount : 2
         },
         upgrader : {
             type : "upgrader",
             body : [ WORK , MOVE , MOVE , CARRY ],
             count : 2,
             priority : 2,
-            maxCount : 4
+            maxCount : 3
         },
 
         builder : {
             type : "builder",
             body : [ WORK , WORK , MOVE , CARRY ],
-            count : 3,
+            count : 2,
             priority : 3,
-            maxCount : 4
+            maxCount : 2
         },
 
         repair : {
@@ -104,7 +104,7 @@ var creepConfig = {
             body : [ WORK , MOVE , MOVE , CARRY ] ,
             count : 1,
             priority : 4,
-            maxCount : 1
+            maxCount : 3
         }
     }
 
