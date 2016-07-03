@@ -96,7 +96,7 @@ var creepConfig = {
             body : [ WORK , WORK , MOVE , CARRY ],
             count : 1,
             priority : 3,
-            maxCount : 3
+            maxCount : 2
         },
 
         repair : {
