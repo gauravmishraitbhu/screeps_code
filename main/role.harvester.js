@@ -28,31 +28,11 @@ var roleHarvester = {
             }
         }
         else {
-            var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION ||
-                                structure.structureType == STRUCTURE_SPAWN ||
-                                structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
-                    }
-            });
+            var currentTarget = creep.memory.currentTarget;
 
-            var HARVESTER_PRIORITY = {
-            }
-            HARVESTER_PRIORITY[STRUCTURE_EXTENSION] = 1;
-            HARVESTER_PRIORITY[STRUCTURE_SPAWN] = 2;
-            HARVESTER_PRIORITY[STRUCTURE_TOWER] = 3;
-
-            //prioritize extention then spawn then tower
-            targets.sort(function(target1 , target2){
-                let priority1 = HARVESTER_PRIORITY[target1.structureType];
-                let priority2 = HARVESTER_PRIORITY[target2.structureType];
-
-                return priority1 - priority2;
-            })
-
-            if(targets.length > 0) {
-                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
+            if(currentTarget != null) {
+                if(creep.transfer(currentTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(currentTarget);
                     //creep.say("move")
                 }
             }else{

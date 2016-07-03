@@ -1,11 +1,15 @@
 
 var structuresByType = {};
 var constructionSitesByType = {};
+var currentRoomName;
 
 module.exports = {
 
-    updateStructureList : function(){
+    updateStructureList : function(roomName){
 
+        for(var name in Game.rooms) {
+            currentRoomName = name;
+        }
 
         for(var name in Game.rooms) {
 
@@ -46,5 +50,18 @@ module.exports = {
 
     getConstructionSiteByType : function(type){
         return constructionSitesByType[type];
+    },
+
+    getHarvestableStructures : function(){
+        var room = Game.games[ currentRoomName ]
+        var targets = room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return (structure.structureType == STRUCTURE_EXTENSION ||
+                    structure.structureType == STRUCTURE_SPAWN ||
+                    structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
+            }
+        });
+
+        return targets;
     }
 }

@@ -3,6 +3,7 @@ var harvesterController = require('role.harvester')
 var builderController = require('role.builder')
 var upgraderController = require('role.upgrader');
 var repairController = require('role.repairwall')
+var StructureManager = require('StructureManager')
 
 var creepListByType = {}
 
@@ -55,6 +56,18 @@ module.exports = {
         var harvesterCreeps = creepListByType[CREEP_TYPES.HARVESTER]
 
         harvesterCreeps.forEach(function(creep){
+
+            if(creep.memory.currentTarget){
+                //check if currentTarget needs to change
+                let currentTarget = creep.memory.currentTarget;
+                if(currentTarget.energy == currentTarget.energyCapacity){
+                    //switch target
+                    creep.memory.currentTarget = getNextTargetToHarvest();
+                }
+            }else{
+                // new creep so get one target
+                creep.memory.currentTarget = getNextTargetToHarvest();
+            }
             harvesterController.run(creep);
         })
 
@@ -77,4 +90,25 @@ module.exports = {
             upgraderController.run(creep);
         })
     }
+}
+
+
+function getNextTargetToHarvest(){
+    var structures = StructureManager.getHarvestableStructures();
+
+    var HARVESTER_PRIORITY = {
+    }
+    HARVESTER_PRIORITY[STRUCTURE_EXTENSION] = 1;
+    HARVESTER_PRIORITY[STRUCTURE_SPAWN] = 2;
+    HARVESTER_PRIORITY[STRUCTURE_TOWER] = 3;
+
+    //prioritize extention then spawn then tower
+    structures.sort(function(target1 , target2){
+        let priority1 = HARVESTER_PRIORITY[target1.structureType];
+        let priority2 = HARVESTER_PRIORITY[target2.structureType];
+
+        return priority1 - priority2;
+    })
+
+    return structures[0];
 }
