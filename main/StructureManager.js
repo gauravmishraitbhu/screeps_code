@@ -53,7 +53,7 @@ module.exports = {
     },
 
     getHarvestableStructures : function(){
-        var room = Game.games[ currentRoomName ]
+        var room = Game.rooms[ currentRoomName ]
         var targets = room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_EXTENSION ||

@@ -28,7 +28,8 @@ var roleHarvester = {
             }
         }
         else {
-            var currentTarget = creep.memory.currentTarget;
+            var currentTargetId = creep.memory.currentTargetId;
+            let currentTarget = Game.getObjectById(currentTargetId);
 
             if(currentTarget != null) {
                 if(creep.transfer(currentTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {

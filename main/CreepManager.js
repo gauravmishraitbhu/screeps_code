@@ -57,16 +57,19 @@ module.exports = {
 
         harvesterCreeps.forEach(function(creep){
 
-            if(creep.memory.currentTarget){
+            if(creep.memory.currentTargetId){
                 //check if currentTarget needs to change
-                let currentTarget = creep.memory.currentTarget;
-                if(currentTarget.energy == currentTarget.energyCapacity){
+                let currentTargetId = creep.memory.currentTargetId;
+                let targetStructure = Game.getObjectById(currentTargetId);
+
+                if(targetStructure.energy == targetStructure.energyCapacity){
                     //switch target
-                    creep.memory.currentTarget = getNextTargetToHarvest();
+                    creep.memory.currentTargetId = getNextTargetToHarvest();
                 }
+
             }else{
                 // new creep so get one target
-                creep.memory.currentTarget = getNextTargetToHarvest();
+                creep.memory.currentTargetId = getNextTargetToHarvest();
             }
             harvesterController.run(creep);
         })
@@ -110,5 +113,5 @@ function getNextTargetToHarvest(){
         return priority1 - priority2;
     })
 
-    return structures[0];
+    return structures[0].id;
 }
