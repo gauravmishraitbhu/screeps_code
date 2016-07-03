@@ -115,6 +115,7 @@ function getNextTargetToHarvest(){
     HARVESTER_PRIORITY[STRUCTURE_EXTENSION] = 1;
     HARVESTER_PRIORITY[STRUCTURE_SPAWN] = 2;
     HARVESTER_PRIORITY[STRUCTURE_TOWER] = 3;
+    HARVESTER_PRIORITY[STRUCTURE_STORAGE] = 4 ;
 
     //prioritize extention then spawn then tower
     structures.sort(function(target1 , target2){
