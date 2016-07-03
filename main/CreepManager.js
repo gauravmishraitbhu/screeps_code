@@ -132,7 +132,7 @@ function getNextTargetToHarvest(){
 }
 
 function getNextTargetToBuild(){
-    var sortOrder = [STRUCTURE_TOWER , STRUCTURE_EXTENSION , STRUCTURE_WALL , STRUCTURE_ROAD ]
+    var sortOrder = [STRUCTURE_TOWER , STRUCTURE_EXTENSION ,STRUCTURE_STORAGE , STRUCTURE_WALL , STRUCTURE_ROAD ]
     var constructionSites = StructureManager.getAllConstructionSites(sortOrder)
 
     if(constructionSites.length > 0){

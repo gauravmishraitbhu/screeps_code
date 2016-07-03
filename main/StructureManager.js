@@ -74,7 +74,7 @@ module.exports = {
 
         for(let structureType in _constructionSitesByType){
             var list = _constructionSitesByType[structureType]
-            result.concat(list);
+            result = result.concat(list);
         }
 
         if(result.length > 0 && sortOrder.length > 0){
