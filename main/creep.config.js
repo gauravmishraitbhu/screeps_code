@@ -324,8 +324,14 @@ function getOptmalBodyConfig(baseBody){
             newBody = [WORK , WORK , WORK , WORK , CARRY ,CARRY , CARRY, CARRY ,MOVE, MOVE , MOVE , MOVE]
             break;
         case 850:
+            newBody = [WORK , WORK , WORK , WORK , WORK ,CARRY , CARRY ,CARRY ,MOVE, MOVE , MOVE , MOVE]
+            break;
         case 900:
+            newBody = [WORK , WORK , WORK , WORK , WORK ,CARRY , CARRY ,CARRY, MOVE ,MOVE, MOVE , MOVE , MOVE]
+            break;
         case 950:
+            newBody = [WORK , WORK , WORK , WORK , WORK ,CARRY , CARRY ,CARRY,CARRY ,MOVE, MOVE , MOVE , MOVE,MOVE]
+            break;
         case 1000:
         case 1050:
         case 1100:
@@ -335,10 +341,10 @@ function getOptmalBodyConfig(baseBody){
         case 1300:
         case 1350:
         case 1400:
-            newBody = [WORK , WORK , WORK , WORK , WORK ,CARRY , CARRY ,CARRY ,MOVE, MOVE , MOVE , MOVE]
+            newBody = [WORK , WORK , WORK , WORK , WORK ,CARRY , CARRY ,CARRY,CARRY ,MOVE, MOVE , MOVE , MOVE,MOVE]
             break;
         default:
-            newBody = [WORK , WORK , WORK , WORK , WORK ,CARRY , CARRY ,CARRY ,MOVE, MOVE , MOVE , MOVE]
+            newBody = [WORK , WORK , WORK , WORK , WORK ,CARRY , CARRY ,CARRY,CARRY ,MOVE, MOVE , MOVE , MOVE,MOVE]
             break;
     }
 
