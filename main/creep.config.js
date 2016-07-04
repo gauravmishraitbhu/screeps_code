@@ -88,15 +88,15 @@ var creepConfig = {
             body : [ WORK , MOVE , MOVE , CARRY ],
             count : 1,
             priority : 2,
-            maxCount : 2
+            maxCount : 4
         },
 
         builder : {
             type : "builder",
             body : [ WORK , WORK , MOVE , CARRY ],
-            count : 1,
+            count : 0,
             priority : 3,
-            maxCount : 2
+            maxCount : 1
         },
 
         repair : {

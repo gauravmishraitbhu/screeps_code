@@ -56,10 +56,15 @@ module.exports = {
         var room = Game.rooms[ currentRoomName ]
         var targets = room.find(FIND_STRUCTURES, {
             filter: (structure) => {
-                return (structure.structureType == STRUCTURE_EXTENSION ||
-                        structure.structureType == STRUCTURE_STORAGE ||
-                    structure.structureType == STRUCTURE_SPAWN ||
-                    structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
+
+                    if(structure.structureType == STRUCTURE_STORAGE){
+                        return structure.store[RESOURCE_ENERGY] < structure.storeCapacity
+                    }else{
+                        return (structure.structureType == STRUCTURE_EXTENSION ||
+                            structure.structureType == STRUCTURE_SPAWN ||
+                            structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity
+                    }
+
             }
         });
 
