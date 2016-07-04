@@ -17,8 +17,9 @@ var roleRepair = {
 
         var objectToRepair = null;
         var wallAndRoads = creep.room.find(FIND_STRUCTURES,{
-            filter : (structure) => (structure.structureType == STRUCTURE_WALL ||
-            structure.structureType == STRUCTURE_ROAD)
+            filter : (structure) => (structure.structureType == STRUCTURE_WALL
+            ||  structure.structureType == STRUCTURE_RAMPART
+            || structure.structureType == STRUCTURE_ROAD)
         })
 
         objectToRepair = getObjectToRepair(wallAndRoads);
@@ -80,7 +81,8 @@ function getObjectToRepair(wallsAndRoads){
     for( let i = 0 ; i < wallsAndRoads.length; i++){
         let structure = wallsAndRoads[i];
 
-        if(structure.structureType == STRUCTURE_WALL && structure.hits < 100 * 1000){
+        if( (structure.structureType == STRUCTURE_WALL || structure.structureType == STRUCTURE_RAMPART)
+            && structure.hits < 100 * 1000){
             wallToRepair = structure;
             break;
         }

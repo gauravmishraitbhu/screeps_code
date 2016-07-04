@@ -251,32 +251,6 @@ module.exports = {
         }
 
         return nextCreepToSpawn;
-    },
-
-    getPriorityList : function(currentCountMap , panicRepair){
-        //var configs = Object.values(creepConfig);
-
-        var currentHarvester = 0, currentBuilder = 0, currentUpgrader = 0;
-
-        if(currentCountMap){
-            currentHarvester = currentCountMap[CREEP_TYPES.HARVESTER];
-            currentBuilder = currentCountMap[CREEP_TYPES.BUILDER];
-            currentUpgrader = currentCountMap[CREEP_TYPES.UPGRADER]
-        }
-
-        if(panicRepair){
-            return ["repair" , "upgrader" , "builder" , "harvester"]
-        }
-
-        //in case if thrashing is occuring. ie harvesting rate is not enuf to spawn
-        // even one instance of low priority creep.
-        if(currentBuilder < 1 && currentHarvester >= 1 && currentUpgrader >= 1){
-            return ["builder" , "harvester" , "upgrader" , "repair"];
-        }else if( currentUpgrader < 1 && currentHarvester >=1){
-            return ["upgrader" , "harvester" , "builder" , "repair"];
-        }
-
-        return ["harvester" , "upgrader" , "builder" , "repair"]
     }
 }
 
