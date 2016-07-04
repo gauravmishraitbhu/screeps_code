@@ -52,6 +52,17 @@ module.exports = {
         return _constructionSitesByType[type];
     },
 
+    isActiveConstructionSitePresent : function(){
+        var result = [];
+
+        for(let structureType in _constructionSitesByType){
+            var list = _constructionSitesByType[structureType]
+            result = result.concat(list);
+        }
+
+        return result.length > 0 ;
+    },
+
     getHarvestableStructures : function(){
         var room = Game.rooms[ currentRoomName ]
         var targets = room.find(FIND_STRUCTURES, {

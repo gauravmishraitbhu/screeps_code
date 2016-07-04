@@ -1,6 +1,7 @@
 var CREEP_TYPES = require('creep.types')
 var config = require('config')
 var structureUtils = require('structure.utils')
+var StructureManager = require('StructureManager')
 
 var creepConfig = {
 
@@ -106,6 +107,38 @@ var creepConfig = {
             priority : 4,
             maxCount : 1
         }
+    },
+    4: {
+        harvester : {
+            type : "harvester",
+            body : [ WORK , WORK , MOVE , CARRY ],
+            count : 2,
+            priority  : 1,
+            maxCount : 2
+        },
+        upgrader : {
+            type : "upgrader",
+            body : [ WORK , MOVE , MOVE , CARRY ],
+            count : 1,
+            priority : 2,
+            maxCount : 3
+        },
+
+        builder : {
+            type : "builder",
+            body : [ WORK , WORK , MOVE , CARRY ],
+            count : 0,
+            priority : 3,
+            maxCount : 1
+        },
+
+        repair : {
+            type : "repair",
+            body : [ WORK , MOVE , MOVE , CARRY ] ,
+            count : 0,
+            priority : 4,
+            maxCount : 1
+        }
     }
 
 }
@@ -115,8 +148,8 @@ var colonyLevel = "1";
 module.exports = {
 
     setControllerLevel : function(level){
-        if(level > 3){
-            level = 3;
+        if(level > 4){
+            level = 4;
         }
         colonyLevel =  level.toString();
     },
@@ -148,6 +181,8 @@ module.exports = {
         let levelConfig = creepConfig[colonyLevel];
         var creepTypeForLevel = [];
 
+        var isActiveConstructionSitePresent = StructureManager.isActiveConstructionSitePresent();
+
         Object.keys(levelConfig).forEach(function(creepType){
             creepTypeForLevel.push ({
                 type : creepType,
@@ -165,6 +200,11 @@ module.exports = {
         for( let i=0;i<creepTypeForLevel.length ; i++){
             let creepObject = creepTypeForLevel[i];
             let creepType = creepObject.type;
+
+            if(creepType == CREEP_TYPES.BUILDER && !isActiveConstructionSitePresent){
+                continue;
+            }
+
             if(levelConfig[creepType].count > currentCountMap[creepType]){
                 nextCreepToSpawn = creepType;
                 break;
@@ -187,6 +227,11 @@ module.exports = {
                 let maxCount = levelConfig[creepType].maxCount;
                 if(maxCount == null){
                     maxCount = 9999;
+                }
+
+                //for builders dont spawn unless we have active sites
+                if(creepType == CREEP_TYPES.BUILDER && !isActiveConstructionSitePresent){
+                    continue;
                 }
 
                 // if config has count < 0 that means never spawn this creep.
